@@ -8,7 +8,10 @@ window.DIAGNOSTICA = {
   direccion: "Jr. Loreto N.° 205, frente a la Plaza Bolognesi",
   ciudad: "Juliaca, Puno",
   mapa: "https://www.google.com/maps/search/?api=1&query=Jr.+Loreto+205+Juliaca",
-  horario: [["Atención", "8:00 a. m. – 6:00 p. m."]],
+  horario: [
+    ["Lunes a sábado", "8:00 a. m. – 6:00 p. m."],
+    ["Domingos", "Cerrado"],
+  ],
   razonSocial: "Diagnóstica PLUS",
   ruc: "",
   actualizado: "18 de octubre de 2026",
