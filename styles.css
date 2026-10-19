@@ -1,0 +1,199 @@
+/* Diagnóstica PLUS — sistema visual basado en el código de colores de tubos de laboratorio */
+:root {
+  --tinta: #13294b;
+  --tinta-suave: #4a5b78;
+  --papel: #f5f8fa;
+  --blanco: #ffffff;
+  --marca: #0e6e6e;
+  --marca-oscura: #0a5252;
+  --lavanda: #7462b3;
+  --oro: #d9a21b;
+  --celeste: #3e9bd1;
+  --rojo: #c8463d;
+  --gris: #8a96a8;
+  --linea: #dbe3ea;
+  --placa: #0d2236;
+  --placa-luz: #cfe6f5;
+
+  --f-titulo: "Archivo", system-ui, sans-serif;
+  --f-texto: "Figtree", system-ui, sans-serif;
+
+  --ancho: 72rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radio: 14px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--f-texto);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--celeste); outline-offset: 3px; border-radius: 4px; }
+
+h1, h2, h3 {
+  font-family: var(--f-titulo);
+  font-stretch: 125%;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.2rem, 5.6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h3 { font-size: 1.3rem; font-stretch: 112%; }
+p { margin: 0; max-width: 62ch; }
+
+.contenedor { width: min(100% - 2 * var(--gutter), var(--ancho)); margin-inline: auto; }
+.saltar { position: absolute; left: -999px; }
+.saltar:focus { left: 1rem; top: 1rem; background: var(--blanco); padding: .5rem 1rem; z-index: 10; }
+
+/* Botones */
+.boton {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .85rem 1.35rem; border-radius: 999px;
+  font-weight: 600; text-decoration: none; font-size: 1rem;
+  border: 2px solid transparent;
+  transition: background-color .15s, color .15s;
+}
+.boton svg { width: 1.2rem; height: 1.2rem; flex: none; }
+.boton-whatsapp { background: var(--marca); color: var(--blanco); }
+.boton-whatsapp:hover { background: var(--marca-oscura); }
+.boton-borde { border-color: var(--tinta); color: var(--tinta); }
+.boton-borde:hover { background: var(--tinta); color: var(--blanco); }
+
+/* Cabecera */
+.cabecera { background: var(--blanco); border-bottom: 1px solid var(--linea); position: sticky; top: 0; z-index: 5; }
+.cabecera .contenedor { display: flex; align-items: center; gap: 1.5rem; min-height: 4.5rem; }
+.logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; margin-right: auto; }
+.logo svg { width: 2.3rem; height: 2.3rem; }
+.logo span { font-family: var(--f-titulo); font-stretch: 118%; font-weight: 700; font-size: 1.15rem; line-height: 1; }
+.logo b { color: var(--marca); font-weight: 800; }
+.menu { display: flex; gap: 1.6rem; }
+.menu a { text-decoration: none; font-weight: 500; color: var(--tinta-suave); }
+.menu a:hover { color: var(--tinta); }
+.cabecera .boton { padding: .6rem 1.1rem; font-size: .95rem; }
+@media (max-width: 760px) { .menu { display: none; } }
+@media (max-width: 420px) { .cabecera .boton span { display: none; } .cabecera .boton { padding: .65rem; } }
+
+/* Hero */
+.hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4.5rem); }
+.hero .contenedor { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.hero p.bajada { margin-top: 1.25rem; font-size: 1.2rem; color: var(--tinta-suave); }
+.hero .acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.hero .aviso { margin-top: 1.5rem; font-size: .95rem; color: var(--tinta-suave); }
+@media (max-width: 860px) { .hero .contenedor { grid-template-columns: 1fr; } .gradilla { max-width: 17rem; } }
+
+/* Gradilla de tubos: el elemento memorable */
+.gradilla { position: relative; aspect-ratio: 5 / 4; max-width: 30rem; justify-self: center; width: 100%; }
+.gradilla svg { width: 100%; height: auto; overflow: visible; }
+.tubo { transform-box: fill-box; animation: entra .7s cubic-bezier(.2, .8, .25, 1) both; }
+.tubo:nth-of-type(2) { animation-delay: .08s; }
+.tubo:nth-of-type(3) { animation-delay: .16s; }
+.tubo:nth-of-type(4) { animation-delay: .24s; }
+.tubo:nth-of-type(5) { animation-delay: .32s; }
+@keyframes entra { from { transform: translateY(-60%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Secciones */
+.seccion { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.seccion-blanca { background: var(--blanco); border-block: 1px solid var(--linea); }
+.encabezado { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 5vw, 3rem); }
+.encabezado p { color: var(--tinta-suave); font-size: 1.125rem; }
+
+/* Servicios */
+.servicios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.servicio {
+  --tapa: var(--lavanda);
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 1.75rem 1.75rem 1.75rem 2.25rem;
+  position: relative;
+  display: grid; gap: .9rem; align-content: start;
+}
+.servicio::before { content: ""; position: absolute; left: 0; top: 1.5rem; bottom: 1.5rem; width: 6px; border-radius: 0 6px 6px 0; background: var(--tapa); }
+.servicio.laboratorio { grid-row: span 2; --tapa: var(--lavanda); }
+.servicio.medicina { --tapa: var(--oro); }
+.servicio ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .45rem; }
+.servicio li { padding-left: 1.25rem; position: relative; }
+.servicio li::before { content: ""; position: absolute; left: 0; top: .62em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--tapa); }
+.servicio .prep { background: var(--papel); border-radius: 10px; padding: 1rem 1.1rem; font-size: .97rem; }
+.servicio .prep strong { display: block; margin-bottom: .2rem; }
+.servicio a.mas { font-weight: 600; color: var(--marca); }
+
+/* Rayos X: negatoscopio */
+.servicio.rayos {
+  --tapa: var(--celeste);
+  background: radial-gradient(120% 90% at 70% 20%, #1b3c58 0%, var(--placa) 65%);
+  border-color: var(--placa);
+  color: var(--placa-luz);
+  overflow: hidden;
+}
+.servicio.rayos h3 { color: var(--blanco); }
+.servicio.rayos .prep { background: rgba(207, 230, 245, .08); }
+.servicio.rayos a.mas { color: var(--placa-luz); }
+.servicio.rayos .costilla { position: absolute; right: -2.5rem; top: 50%; translate: 0 -50%; width: 11rem; opacity: .18; pointer-events: none; }
+@media (max-width: 860px) { .servicios { grid-template-columns: 1fr; } .servicio.laboratorio { grid-row: auto; } }
+
+/* Cómo atendemos: secuencia real */
+.pasos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); counter-reset: paso; }
+.pasos li { counter-increment: paso; display: grid; gap: .6rem; align-content: start; padding-top: 1.25rem; border-top: 3px solid var(--tinta); }
+.pasos li::before { content: "Paso " counter(paso); font-weight: 600; color: var(--marca); }
+.pasos p { color: var(--tinta-suave); }
+@media (max-width: 760px) { .pasos { grid-template-columns: 1fr; } }
+
+/* Por qué elegirnos */
+.razones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+.razon { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+.razon .tapa { width: 1.6rem; height: .9rem; border-radius: 4px 4px 2px 2px; margin-top: .45rem; }
+.razon h3 { margin-bottom: .35rem; }
+.razon p { color: var(--tinta-suave); }
+@media (max-width: 760px) { .razones { grid-template-columns: 1fr; } }
+
+/* Contacto */
+.contacto .contenedor { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.contacto .acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+.ficha { background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio); padding: 1.75rem; display: grid; gap: 1.4rem; }
+.ficha h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+.ficha a { color: var(--marca); font-weight: 600; }
+.ficha dl { margin: 0; display: grid; gap: .3rem; }
+.ficha dl div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dashed var(--linea); padding-bottom: .3rem; }
+.ficha dt { color: var(--tinta-suave); }
+.ficha dd { margin: 0; font-weight: 600; text-align: right; }
+@media (max-width: 760px) { .contacto .contenedor { grid-template-columns: 1fr; } }
+
+/* Pie */
+.pie { background: var(--tinta); color: #c9d3e3; padding-block: 2.5rem; font-size: .95rem; }
+.pie .contenedor { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; }
+.pie nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.pie a { color: var(--blanco); }
+.pie .franja { display: flex; gap: 4px; }
+.pie .franja i { width: 18px; height: 6px; border-radius: 2px; }
+
+/* Páginas legales */
+.legal { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.legal .contenedor { max-width: 46rem; }
+.legal h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: .75rem; }
+.legal .fecha { color: var(--tinta-suave); margin-bottom: 2.5rem; }
+.legal h2 { font-size: 1.35rem; font-stretch: 112%; margin: 2.25rem 0 .75rem; }
+.legal p, .legal li { color: #2c3d5a; }
+.legal p + p { margin-top: .9rem; }
+.legal ul { padding-left: 1.2rem; display: grid; gap: .4rem; }
+.legal a { color: var(--marca); }
