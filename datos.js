@@ -1,18 +1,16 @@
 // Datos del centro: edita SOLO este archivo y se actualiza toda la web.
+// Un campo vacío ("") se oculta automáticamente en la web.
 // WhatsApp con código de país y sin "+" ni espacios (Perú = 51).
 window.DIAGNOSTICA = {
-  whatsapp: "51900000000",
-  telefonoVisible: "+51 900 000 000",
-  correo: "contacto@diagnosticaplus.pe",
-  direccion: "Av. Por confirmar 123",
-  ciudad: "Lima, Perú",
-  mapa: "https://maps.google.com/?q=Diagn%C3%B3stica+PLUS",
-  horario: [
-    ["Lunes a viernes", "7:00 a. m. – 8:00 p. m."],
-    ["Sábados", "7:00 a. m. – 1:00 p. m."],
-  ],
+  whatsapp: "51973558709",
+  telefonoVisible: "+51 973 558 709",
+  correo: "",
+  direccion: "Jr. Loreto N.° 205, frente a la Plaza Bolognesi",
+  ciudad: "Juliaca, Puno",
+  mapa: "https://www.google.com/maps/search/?api=1&query=Jr.+Loreto+205+Juliaca",
+  horario: [["Atención", "8:00 a. m. – 6:00 p. m."]],
   razonSocial: "Diagnóstica PLUS",
-  ruc: "Por confirmar",
+  ruc: "",
   actualizado: "18 de octubre de 2026",
 };
 
@@ -30,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-enlace]").forEach((a) => {
     const k = a.dataset.enlace;
     a.href = k === "correo" ? `mailto:${d.correo}` : k === "telefono" ? `tel:+${d.whatsapp}` : d[k];
+  });
+  // Oculta bloques cuyo dato aún no se ha completado
+  document.querySelectorAll("[data-si]").forEach((el) => {
+    if (!d[el.dataset.si]) el.hidden = true;
   });
   document.querySelectorAll("[data-horario]").forEach((dl) => {
     dl.innerHTML = d.horario.map(([dia, h]) => `<div><dt>${dia}</dt><dd>${h}</dd></div>`).join("");
